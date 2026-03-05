@@ -3,75 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>light verse for kinda dark times</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>LIGHT VERSE // DARK EDITION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-      color: #000;
-      font-size: 16px;
-      line-height: 1.6;
+      font-family: 'Press Start 2P', monospace;
+      background: #000;
+      color: #00ff41;
+      font-size: 10px;
+      line-height: 1.8;
+      animation: flicker 10s infinite;
     }
 
+    /* CRT scanlines */
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.13) 2px, rgba(0,0,0,0.13) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* CRT vignette */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    @keyframes flicker {
+      0%,100%{opacity:1} 5%{opacity:.97} 10%{opacity:1} 60%{opacity:1} 65%{opacity:.98} 70%{opacity:1}
+    }
+    @keyframes blink {
+      0%,100%{opacity:1} 50%{opacity:0}
+    }
+    @keyframes twinkle {
+      0%,100%{opacity:1} 50%{opacity:.15}
+    }
+    @keyframes march {
+      from{background-position:0 0} to{background-position:16px 0}
+    }
+
+    /* ── HEADER ── */
     header {
+      text-align: center;
       padding: 4rem 2rem 3rem;
-      max-width: 680px;
-      margin: 0 auto;
-      border-bottom: 1px solid #000;
+      position: relative;
+      z-index: 1;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 400;
-      letter-spacing: 0.01em;
+    .title-box {
+      display: inline-block;
+      border: 3px solid #00ff41;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 0 20px #00ff41, inset 0 0 20px rgba(0,255,65,.08);
+      position: relative;
     }
 
+    /* animated marching-ants border */
+    .title-box::after {
+      content: '';
+      position: absolute; inset: 4px;
+      border: 1px dashed rgba(0,255,65,.4);
+      animation: march 0.5s linear infinite;
+    }
+
+    h1 {
+      font-size: clamp(1rem, 4vw, 2rem);
+      color: #00ff41;
+      text-shadow: 0 0 10px #00ff41, 0 0 25px #00ff41;
+      line-height: 2.2;
+    }
+
+    .byline {
+      font-size: 0.6rem;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+      margin-top: 0.8rem;
+    }
+
+    .insert-coin {
+      font-size: 0.7rem;
+      color: #ffff00;
+      text-shadow: 0 0 10px #ffff00;
+      margin-top: 2rem;
+      animation: blink 1s step-end infinite;
+    }
+
+    .hiscore {
+      font-size: 0.55rem;
+      color: #ff00ff;
+      text-shadow: 0 0 6px #ff00ff;
+      margin-top: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── MAIN ── */
     main {
-      max-width: 680px;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 0 2rem 6rem;
+      padding: 3rem 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
+    /* ── POEM CARDS ── */
     .poem {
-      padding: 3rem 0;
-      border-bottom: 1px solid #e0e0e0;
+      margin: 2.5rem 0;
+      padding: 1.8rem 1.5rem 1.5rem;
+      border: 2px solid currentColor;
+      position: relative;
     }
 
-    .poem:last-child {
-      border-bottom: none;
+    .poem:hover {
+      box-shadow: 0 0 18px currentColor;
+      transition: box-shadow 0.2s;
+    }
+
+    .stg {
+      position: absolute;
+      top: -0.75rem; left: 0.8rem;
+      font-size: 0.5rem;
+      padding: 0 0.4rem;
+      background: #000;
+    }
+
+    .pscore {
+      position: absolute;
+      top: -0.75rem; right: 0.8rem;
+      font-size: 0.5rem;
+      padding: 0 0.4rem;
+      background: #000;
+    }
+
+    /* Pixel art block */
+    .px {
+      display: table;
+      margin: 0 auto 1.4rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      line-height: 1.25;
+      white-space: pre;
     }
 
     .poem h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.01em;
+      font-size: 0.72rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .poem p {
+      font-family: 'VT323', monospace;
+      font-size: 1.45rem;
+      line-height: 1.65;
       white-space: pre-wrap;
-      font-size: 1rem;
-      line-height: 1.75;
-      font-weight: 400;
+      opacity: .92;
+    }
+
+    /* ── COLOR CLASSES ── */
+    .g  { color: #00ff41; }
+    .g  .px, .g  h2 { text-shadow: 0 0 7px #00ff41; }
+
+    .cy { color: #00ffff; }
+    .cy .px, .cy h2 { text-shadow: 0 0 7px #00ffff; }
+
+    .m  { color: #ff00ff; }
+    .m  .px, .m  h2 { text-shadow: 0 0 7px #ff00ff; }
+
+    .y  { color: #ffff00; }
+    .y  .px, .y  h2 { text-shadow: 0 0 7px #ffff00; }
+
+    .o  { color: #ff8c00; }
+    .o  .px, .o  h2 { text-shadow: 0 0 7px #ff8c00; }
+
+    .r  { color: #ff3c3c; }
+    .r  .px, .r  h2 { text-shadow: 0 0 7px #ff3c3c; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem 5rem;
+      position: relative;
+      z-index: 1;
+      border-top: 2px solid #00ff41;
+    }
+
+    .game-over {
+      font-size: clamp(1rem, 4vw, 1.8rem);
+      color: #ff3c3c;
+      text-shadow: 0 0 15px #ff3c3c, 0 0 35px #ff3c3c;
+      animation: blink 2s step-end infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    .credits {
+      font-size: 0.5rem;
+      color: #1a1a1a;
+      margin-top: 2rem;
+      line-height: 2.5;
+    }
+
+    /* stars container */
+    #stars {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
 
+<div id="stars"></div>
+
 <header>
-  <h1>light verse for kinda dark times: by madeleine di gangi</h1>
+  <div class="title-box">
+    <h1>LIGHT VERSE<br>FOR KINDA<br>DARK TIMES</h1>
+    <div class="byline">BY MADELEINE DI GANGI</div>
+  </div>
+  <div class="insert-coin">&#9658; INSERT COIN TO CONTINUE &#9668;</div>
+  <div class="hiscore">&#9829; &#9829; &#9829; &nbsp; HI-SCORE: 999999 &nbsp; &#9829; &#9829; &#9829;</div>
 </header>
 
 <main>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 01</span><span class="pscore">PTS:5000</span>
+    <pre class="px">  . * . * . * . * .
+    __|__
+ ~~~[ =&#9679;= ]~~~   &#9992;
+    __|__
+  . * . * . * . * .</pre>
     <h2>CDG</h2>
     <p>My heart feels a lot like Charles de Gaulle:
 open - but oh, what a maze:
@@ -95,7 +263,13 @@ after all —
 it's Charles de Gaulle.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 02</span><span class="pscore">PTS:1000</span>
+    <pre class="px"> &#9679;   &#9679;   &#9679;   &#9679;
+ |   |   |   |
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; . . . . . . &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>meetings</h2>
     <p>In a meeting
 Where everyone's talking
@@ -106,7 +280,13 @@ No matter how
 Un-astute.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 03</span><span class="pscore">PTS:2000</span>
+    <pre class="px"> * * * * * * *
+*  ~~~  ~~~  *
+ * (x) (x) *
+  *  ~~~~~  *
+ * * * * * * *</pre>
     <h2>hangovers</h2>
     <p>A drinker's remorse
 Is much like a horse
@@ -121,7 +301,13 @@ All your drunk yesterdays
 Does it ever.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 04</span><span class="pscore">PTS:1500</span>
+    <pre class="px">  &#9604;&#9604;&#9604;&#9604;&#9604;&#9604;&#9604;&#9604;
+ &#9616;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9616;
+ &#9616;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9616;
+ &#9616;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9616;
+  &#9600;&#9600;&#9600;&#9600;&#9600;&#9600;&#9600;&#9600;</pre>
     <h2>lunch</h2>
     <p>We're an interesting, intellectual bunch
 Pondering work questions each day
@@ -133,7 +319,15 @@ It mostly revolves around food
 And it starts around 9 o'clock.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 05</span><span class="pscore">PTS:3000</span>
+    <pre class="px">  &#9608;&#9608;  &#9608;&#9608;
+ &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+ &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+  &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+   &#9608;&#9608;&#9608;&#9608;
+    &#9608;&#9608;</pre>
     <h2>crush</h2>
     <p>You look like everyone.
 And I don't mean that means bland—
@@ -145,7 +339,13 @@ Coke and cigarettes and McDonald's too
 You, you, you, you, you.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 06</span><span class="pscore">PTS:9999</span>
+    <pre class="px">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; &#9733; SCORE &#9733; &#9474;
+&#9474;   10 / 10   &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+  &#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;</pre>
     <h2>the perfect 10</h2>
     <p>Nothing is worse than the perfect 10,
 They're usually the world's most tedious men
@@ -158,7 +358,13 @@ One with a chiseled...wit with which to woo
 And a perfect six pack...of my favorite brew.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 07</span><span class="pscore">PTS:1200</span>
+    <pre class="px">  &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+  &#9474; ... &#9474;
+  &#9474;     &#9474;
+  &#9474;[OK]&#9474;
+  &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>texting</h2>
     <p>We're texting less
 And I confess
@@ -183,7 +389,13 @@ There are plenty of
 thumbs in the sea.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 08</span><span class="pscore">PTS:1800</span>
+    <pre class="px">  ~  ~ ~  ~
+   ~ ~  ~
+ &#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+ &#9553;      &#9553;
+ &#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;</pre>
     <h2>smoking</h2>
     <p>I'm not supposed to smoke, I know,
 And yet the good pack tells me so
@@ -214,7 +426,13 @@ That if my heart's broken, who cares what else shatters?
 I know, I know, I know.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 09</span><span class="pscore">PTS:2200</span>
+    <pre class="px">&#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+&#9553; &#9834; SYNTH &#9834; &#9553;
+&#9568;&#9552;&#9580;&#9552;&#9580;&#9552;&#9580;&#9552;&#9580;&#9552;&#9580;&#9571;
+&#9553;&#9474;&#9608;&#9474;&#9608;&#9474; &#9474;&#9608;&#9474;&#9553;
+&#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;</pre>
     <h2>childhood</h2>
     <p>Growing up I had no pets - nary a dog, never a cat,
 but I had plenty of synthesizers to coo over and pat
@@ -222,7 +440,13 @@ They ranged in size and splendor, some were silver, some were black
 Most were named Roland, and they travelled in a pack.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 10</span><span class="pscore">PTS:2800</span>
+    <pre class="px">&#9608;&#9616;           &#9590;&#9608;
+&#9608;&#9616;  &#9472;&#9472;&#9472;&#9472;&#9472;  &#9590;&#9608;
+&#9608;&#9616;  &#9472;&#9472;&#9472;&#9472;&#9472;  &#9590;&#9608;
+&#9608;&#9616;           &#9590;&#9608;
+&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</pre>
     <h2>filmores</h2>
     <p>The strippers' eyes were completely dead
 Like marbles in a glass,
@@ -235,7 +459,14 @@ Closed up the business of her life
 and leased it out to half the town.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 11</span><span class="pscore">PTS:1100</span>
+    <pre class="px"> &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+ &#9474; ? ? &#9474;
+ &#9474;     &#9474;
+ &#9474; ? ? &#9474;
+ &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+     .</pre>
     <h2>ambiguity.</h2>
     <p>Is this a date or a friendly drink?
 I'm currently unsure what to think
@@ -256,7 +487,13 @@ I'm liking our rapport, and how
 the Guinness tastes just so.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 12</span><span class="pscore">PTS:1600</span>
+    <pre class="px"> &#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+ &#9553; ~~~~~~ &#9553;
+ &#9553; ~~~~~~ &#9553;
+ &#9553; ~~~~~~ &#9553;
+ &#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;</pre>
     <h2>stoner sonnet</h2>
     <p>Dearest stoner, you were my addiction
 For a moment, 'twas heavy and hot
@@ -274,7 +511,13 @@ It was fun, though, to sit around your scuzzy place
 Giggling at the filmic antics of Chevy Chase.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 13</span><span class="pscore">PTS:1400</span>
+    <pre class="px"> &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+ &#9474; &#9484;&#9472;&#9472;&#9472;&#9488; &#9474;
+ &#9474; &#9474; &#9679; &#9474; &#9474;
+ &#9474; &#9492;&#9472;&#9472;&#9472;&#9496; &#9474;
+ &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>the beaconsfield</h2>
     <p>Although Friday night epiphanies are usually rare,
 Here I find myself suddenly seeing
@@ -292,7 +535,13 @@ Gazing round this lavish lavatory, I'm fully aware
 These bathrooms were not made for peeing.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 14</span><span class="pscore">PTS:1300</span>
+    <pre class="px">  &#9581;&#9472;&#9472;&#9472;&#9472;&#9472;&#9582;
+ &#9581;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9582;
+ &#9474;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9474;
+ &#9474; B&#9617;Y &#9617;CH&#9617;F &#9474;
+ &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>boychef</h2>
     <p>Oh, boy chef, you're cooking up trouble
 And I am writing cliches
@@ -301,7 +550,13 @@ I'll stick to un-witticisms,
 You stick to souffle.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 15</span><span class="pscore">PTS:900</span>
+    <pre class="px">    &#9679;
+   &#9472;&#9532;&#9472;
+   / \
+
+  [alone]</pre>
     <h2>solo</h2>
     <p>Living alone can be lonely,
 A seemingly obvious fact,
@@ -321,7 +576,13 @@ You'll think, "How nice it would be to have
 Someone lovely to share all of this".</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 16</span><span class="pscore">PTS:3500</span>
+    <pre class="px"> &#9586; &#9587; &#9586; &#9587;
+  &#9586;&#9587; &#9586;&#9587;
+  &#9484;&#9472;&#9472;&#9472;&#9488;
+  &#9474; .. &#9474;
+  &#9492;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>cancer</h2>
     <p>Cancer, you ugly and unwanted guest
 You always show up uninvited
@@ -339,7 +600,13 @@ We all ask you politely to get the hell out
 And still you just sit there, thickening.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 17</span><span class="pscore">PTS:2100</span>
+    <pre class="px">  &#9474;\   &#9999;
+  &#9474; \  /
+ &#9556;&#9553;&#9552;&#9559;/
+ &#9553;   &#9553;
+ &#9562;&#9552;&#9552;&#9565;</pre>
     <h2>drunk poetry</h2>
     <p>You should never write poems when you are drunk
 After all, you're not really at your most pithy
@@ -362,7 +629,13 @@ I bet it's your head, not your heart that will break
 And then hand in hand, they'll start healing.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 18</span><span class="pscore">PTS:1700</span>
+    <pre class="px">  * * * *
+ * /&#9650;\ *
+ */   \*
+  &#9474;   &#9474;
+  &#9492;&#9472;&#9472;&#9496;</pre>
     <h2>Autumn</h2>
     <p>wearing your
 heart on your sleeve,
@@ -380,7 +653,13 @@ and will take more
 than bourbon to thaw.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 19</span><span class="pscore">PTS:1900</span>
+    <pre class="px">   &#9484;&#9472;&#9472;&#9488;
+  &#9484;&#9524;&#9472;&#9472;&#9524;&#9488;
+  &#9474;&#9608;&#9608;&#9608;&#9608;&#9474;
+  &#9474;&#9608;&#9608;&#9608;&#9608;&#9474;
+  &#9492;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>death of a salesman</h2>
     <p>When irritating marketing guy
 In meetings won't stop talking
@@ -400,7 +679,12 @@ I realize all this sounds morose
 But frankly, no one should be that verbose.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 20</span><span class="pscore">PTS:1500</span>
+    <pre class="px"> &#9650; &#9650;&#9650; &#9650; &#9650;
+  &#9650;&#9650;&#9650;&#9650;
+   &#9650;&#9650;
+  &#9679;&#9472;&#9472;&#9472;&#9472;&#9654;</pre>
     <h2>bowling</h2>
     <p>It might seem a bit rustic
 And make yuppies shudder
@@ -412,7 +696,14 @@ And let's not forget
 Those glorious shoes.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 21</span><span class="pscore">PTS:4000</span>
+    <pre class="px">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654;
+  &#9608;&#9608;  &#9608;&#9608;
+ &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+  &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+   &#9608;&#9608;&#9608;&#9608;
+    &#9608;&#9608;</pre>
     <h2>feb 14</h2>
     <p>On this, the year's most romantic day,
 Wouldn't you know my luck
@@ -435,7 +726,14 @@ On this day meant for lovers frolics
 My only pick up was a Toyota.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 22</span><span class="pscore">PTS:800</span>
+    <pre class="px"> &#9581;&#9472;&#9472;&#9472;&#9472;&#9472;&#9582;
+ &#9474;  12  &#9474;
+ &#9474;  &#9474;   &#9474;
+ &#9474;  &#9492;&#9472; &#9474;
+ &#9474;   6  &#9474;
+ &#9584;&#9472;&#9472;&#9472;&#9472;&#9472;&#9583;</pre>
     <h2>shirking</h2>
     <p>procrastinate procrastinate
 it's all i ever do
@@ -443,7 +741,13 @@ and yet, i never put off
 a chance to think of you.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 23</span><span class="pscore">PTS:2500</span>
+    <pre class="px">   &#9733;
+  &#9733;&#9733;&#9733;
+ &#9733;&#9733;&#9733;&#9733;&#9733;
+  &#9733;&#9733;&#9733;
+   &#9733;</pre>
     <h2>American</h2>
     <p>if all of my exes
 left a hole as big as you,
@@ -452,7 +756,13 @@ be the size of Texas
 -red, tight &amp; blue.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 24</span><span class="pscore">PTS:3200</span>
+    <pre class="px">  &#9608;&#9608;&#9608;
+    &#9608;&#9608;&#9608;
+  &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;
+    &#9608;&#9608;&#9608;
+      &#9608;&#9608;</pre>
     <h2>wit</h2>
     <p>wit is a wonderful rarity
 prized by anyone smart
@@ -470,7 +780,13 @@ all the funnys are usually taken
 and the funniest is you.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 25</span><span class="pscore">PTS:4500</span>
+    <pre class="px">  &#9472;&#9679;
+  /&#9474;\
+ / &#9474; \
+[  &#9675;  ]
+ ?  ?  ?</pre>
     <h2>Non motherhood</h2>
     <p>Who am I, if not a mother?
 Not dragging my tiny, whining golden-hearted children
@@ -497,7 +813,13 @@ But me is such a glorious word
 It's just the self, but not as blurred.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 26</span><span class="pscore">PTS:1100</span>
+    <pre class="px"> &#9484;&#9516;&#9516;&#9516;&#9516;&#9516;&#9516;&#9488;
+ &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+ &#9474; REGRETS&#9474;
+ &#9474; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9474;
+ &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>regrets</h2>
     <p>I kind of regret having all these regrets —
 They seem pretty useless to me
@@ -509,7 +831,13 @@ Sorry Greta Thunberg—-
 I'm a grownup, you see.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 27</span><span class="pscore">PTS:2700</span>
+    <pre class="px"> * &#9733; * &#9733; * &#9733; *
+* &#9733; * &#9733; * &#9733; * &#9733;
+ * &#9733; * &#9733; * &#9733; *
+* &#9733; * &#9733; * &#9733; * &#9733;
+ * &#9733; * &#9733; * &#9733; *</pre>
     <h2>New years</h2>
     <p>should auld acquaintance be forgot
 or just those worth forgetting?
@@ -522,7 +850,13 @@ make room for mistakes you've yet to make
 and dates with new mankind.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 28</span><span class="pscore">PTS:1300</span>
+    <pre class="px">  &#9586; &#9587;
+ &#9581;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9582;
+ &#9474;&#126;&#126;&#126;&#126;&#126;&#126;&#9474;
+ &#9474;&#126;&#126;&#126;&#126;&#126;&#126;&#9474;
+ &#9584;&#9472;&#9472;&#9524;&#9472;&#9472;&#9583;</pre>
     <h2>noodles</h2>
     <p>alone with my noodles
 i'm left to reflect
@@ -535,7 +869,13 @@ and just how appallingly
 i eat with chopsticks.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 29</span><span class="pscore">PTS:1600</span>
+    <pre class="px">&#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+&#9553; BUY NOW&#9553;
+&#9553; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9553;
+&#9562;&#9552;&#9552;&#9552;&#9524;&#9552;&#9552;&#9552;&#9524;&#9552;&#9565;
+      &#9474;</pre>
     <h2>Advertising</h2>
     <p>work / life balance, where'd you go?
 we used to be so tight!
@@ -549,7 +889,12 @@ would love to meet up with you guys
 — but i'll probably be here late.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 30</span><span class="pscore">PTS:1200</span>
+    <pre class="px"> &#9608; &#9608;&#9608; &#9608; &#9608;&#9608;&#9608;
+ &#9608; &#9608;&#9608; &#9608; &#9608;&#9608;&#9608;
+&#9608;&#9608; &#9608;&#9608; &#9608; &#9608;&#9608;&#9608;
+&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</pre>
     <h2>1st avenue</h2>
     <p>my tiny apartment has plenty of charms
 among them, its 4 am car alarms,
@@ -558,7 +903,12 @@ or the honky tonk honking
 or the drunk caterwaul.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 31</span><span class="pscore">PTS:1400</span>
+    <pre class="px"> &#9581;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9582;
+&#9581;&#9618; &#9711; . &#9711; &#9618;&#9582;
+&#9474;    &#9472;    &#9474;
+&#9584;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9583;</pre>
     <h2>M.o.</h2>
     <p>are you aloof?
 well, step right up
@@ -575,7 +925,11 @@ kind of
 be mine.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem cy">
+    <span class="stg">STAGE 32</span><span class="pscore">PTS:1800</span>
+    <pre class="px">))) &#9685; . &#8594; . &#9788; (((
+    .  &#8594;  &#8594;  .
+  MOON   SUN</pre>
     <h2>In the morning</h2>
     <p>there's something kind of dirty
 about working at three thirty
@@ -598,7 +952,13 @@ i had warning
 i had warning.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem m">
+    <span class="stg">STAGE 33</span><span class="pscore">PTS:2000</span>
+    <pre class="px">   &#9650;  &#9992;
+  &#9650; &#9650;
+ &#9484;&#9472;&#9472;&#9472;&#9488;
+ &#9474; &#9484;&#9488;&#9474;
+ &#9492;&#9472;&#9472;&#9472;&#9496;</pre>
     <h2>Home for the holidays</h2>
     <p>la guardia. christmas.
 gate 7C.
@@ -614,7 +974,14 @@ shoe removal
 down to a serious art.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem y">
+    <span class="stg">STAGE 34</span><span class="pscore">PTS:700</span>
+    <pre class="px">&#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+&#9553; SLIDE 7 &#9553;
+&#9553; &#9608;&#9608; &#9608;&#9608;&#9608; &#9553;
+&#9562;&#9552;&#9552;&#9552;&#9552;&#9524;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;
+      &#9474;
+  &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;</pre>
     <h2>Deck</h2>
     <p>what a riveting keynote.
 no, really - it blew me away
@@ -630,7 +997,12 @@ then stomp it
 into the floor.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem o">
+    <span class="stg">STAGE 35</span><span class="pscore">PTS:2400</span>
+    <pre class="px"> &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9472;&#9488;
+ &#9608;&#9617;&#9617;&#9617;&#9617;&#9617;&#9608; &#9474;
+ &#9608;&#9617;&#9617;&#9617;&#9617;&#9617;&#9608;&#9472;&#9496;
+ &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</pre>
     <h2>Happy hour</h2>
     <p>if every hour was happy hour
 how happy we would be,
@@ -654,7 +1026,13 @@ but as it stands there's only one
 so we're screwed for the other 23.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem r">
+    <span class="stg">STAGE 36</span><span class="pscore">PTS:600</span>
+    <pre class="px"> &#9556;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9559;
+ &#9553; $ 0.00 &#9553;
+ &#9553;        &#9553;
+ &#9562;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9565;
+  [EMPTY]</pre>
     <h2>Poor me</h2>
     <p>there's nothing romantic
 about being broke,
@@ -666,7 +1044,12 @@ but i prefer not to
 live like a pigeon.</p>
   </article>
 
-  <article class="poem">
+  <article class="poem g">
+    <span class="stg">STAGE 37</span><span class="pscore">PTS:9000</span>
+    <pre class="px"> &#9608; &#9608;&#9608;&#9608;&#9608; &#9608; &#9608;
+ &#9608; &#9608;&#9608;&#9608;&#9608; &#9608; &#9608;
+&#9608;&#9608; &#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;
+&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</pre>
     <h2>NYC</h2>
     <p>new york is a glorious city
 skyscrapingly, gapingly pretty,
@@ -676,6 +1059,28 @@ and now i feel rather un-witty.</p>
   </article>
 
 </main>
+
+<footer>
+  <div class="game-over">— GAME OVER —</div>
+  <div style="font-size:.7rem;color:#ff00ff;text-shadow:0 0 8px #ff00ff;animation:blink 3s step-end infinite">&#9829; THANKS FOR PLAYING &#9829;</div>
+  <div class="credits">© 2024 MADELEINE DI GANGI &nbsp;|&nbsp; ALL RIGHTS RESERVED<br>PRESS START TO READ AGAIN</div>
+</footer>
+
+<script>
+(function(){
+  var s = document.getElementById('stars');
+  for(var i=0;i<120;i++){
+    var d=document.createElement('div');
+    var x=Math.random()*100, y=Math.random()*100;
+    var sz=Math.random()>0.88?2:1;
+    var op=0.2+Math.random()*0.8;
+    var dur=(1+Math.random()*4).toFixed(1);
+    var delay=(Math.random()*5).toFixed(1);
+    d.style.cssText='position:absolute;left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;background:#fff;border-radius:50%;opacity:'+op+';animation:twinkle '+dur+'s '+delay+'s infinite;';
+    s.appendChild(d);
+  }
+})();
+</script>
 
 </body>
 </html>
